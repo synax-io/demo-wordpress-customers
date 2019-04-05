@@ -1,0 +1,32 @@
+apiVersion: wordpress.presslabs.org/v1alpha1
+kind: Wordpress
+metadata:
+  name: demo.cnative.io
+spec:
+  replicas: 3
+  domains:
+    - demo.cnative.io
+  # image: quay.io/presslabs/wordpress-runtime
+  # tag: latest
+  code: {} # where to find the code
+    # contentSubpath: wp-content/
+    # by default, code get's an empty dir. Can be one of the following:
+  
+  # extra volumes for the Wordpress container
+  volumes: []
+  # extra volume mounts for the Wordpress container
+  volumeMounts: []
+  # extra env variables for the Wordpress container
+  env:
+    - name: WORDPRESS_DB_HOST
+      value: mysite-mysql
+    - name: WORDPRESS_DB_PASSWORD
+      valueFrom:
+        secretKeyRef: mysite-mysql
+        key: PASSWORD
+  envFrom: []
+
+  # secret containg HTTPS certificate
+  tlsSecretRef: mysite-tls
+  # extra ingress annotations
+  ingressAnnotations: {}
