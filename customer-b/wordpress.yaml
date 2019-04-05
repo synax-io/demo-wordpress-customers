@@ -1,7 +1,7 @@
 apiVersion: wordpress.presslabs.org/v1alpha1
 kind: Wordpress
 metadata:
-  name: demo.cnative.io
+  name: customer-a
 spec:
   replicas: 3
   domains:
